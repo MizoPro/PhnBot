@@ -78,6 +78,9 @@ app.get('/webhook', (req, res) => {
       // Responds with '403 Forbidden' if verify tokens do not match
       res.sendStatus(403);
     }
+  } else {
+    // Responds with '403 Forbidden' when no token were supplied
+    res.sendStatus(403);
   }
 });
 
