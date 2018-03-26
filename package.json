@@ -1,0 +1,34 @@
+{
+  "name": "phnbot",
+  "version": "0.1.0",
+  "description": "Den of Phoenix's Official Messenger app.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mizopro/phnbot.git"
+  },
+  "keywords": [
+    "phoenix",
+    "den",
+    "walking",
+    "phoenix",
+    "app",
+    "bot",
+    "messenger",
+    "chat",
+    "facebook"
+  ],
+  "author": "MizoPro <hmzblhdjahmd@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mizopro/phnbot/issues"
+  },
+  "homepage": "https://github.com/mizopro/phnbot#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3"
+  }
+}
