@@ -1,0 +1,17 @@
+{
+    "name": "phnbot",
+    "description": "Den of Phoenix's Official Messenger app.",
+    "keywords": [
+      "phoenix",
+      "den",
+      "walking",
+      "phoenix",
+      "app",
+      "bot",
+      "messenger",
+      "chat",
+      "facebook"
+    ],
+    "author": "MizoPro <hmzblhdjahmd@gmail.com>",
+    "license": "MIT"
+}
