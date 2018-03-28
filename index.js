@@ -111,6 +111,10 @@ app.get('/', (req, res) => {
     res.sendFile('index.html');
 });
 
+// Retrieve an anime information
+app.get('/anime', (req, res) => {
+
+});
 
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
@@ -122,7 +126,7 @@ function handleMessage(sender_psid, received_message) {
 
         // Create the payload for a basic text message
         response = {
-            "text": `"${received_message.text}" ka?`
+            "text": received_message.text.match(/ahla|hello|yo|hi|hey/i) ? 'Hello!' : `"${received_message.text}"? Nani desu ka? :)`
         }
     } else if (received_message.attachments) {
 
