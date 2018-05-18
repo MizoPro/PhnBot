@@ -147,12 +147,12 @@ app.get('/', (req, res) => {
 
 // Retrieve an anime information
 app.get('/a/:id', (req, res) => {
-    /*anime(parseInt(req.params.id))
+    anime(parseInt(req.params.id))
     .then(a => res.json(a))
     .catch(err => {
         res.status(404);
         res.send(err.message)
-    });*/res.send(req.params.id);
+    });
 });
 
 app.get('/m/:id', (req, res) => {
