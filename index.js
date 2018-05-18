@@ -170,8 +170,8 @@ function handleMessage(sender_psid, received_message) {
 
         // Create the payload for a basic text message
         response = {
-            "text": received_message.text.match(/ahla|hello|yo|hi|hey/i) ? 'Hello!' : `"${received_message.text}"? Nani desu ka? :)`
-        }
+            "text": received_message.text.match(/ahla|hello|yo|hi|hey/i) ? 'Hello!' : received_message.text.match(/baka|idiot|stupid|fool|nincompoop/i) ? '(._.)' : `"${received_message.text}"?\nNani desu ka? :)`
+        };
     } else if (received_message.attachments) {
 
         // Gets the URL of the message attachment
