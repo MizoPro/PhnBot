@@ -1,6 +1,8 @@
 /*!
  * PhnBot
  * A Messenger bot build for `Den of Phoenix` glorious page.
+ * Also, offers a small MyAnimeList.net API for parsing data
+ * into JSON.
  *
  * Author: MizoPro (C) 2018
  * License: The MIT License <https://github.com/mizopro/phnbot/blob/master/LICENSE>
@@ -8,14 +10,22 @@
 
 
 /*
- * Module dependencies
+ * Module external dependencies
  * @api private
  */
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const request = require("request");
 const dotenv = require("dotenv");
+
+/*
+ * App internal modules
+ * @api private
+ */
+
+const anime = require("./lib/anime.js");
 
 // Load environment variables
 dotenv.load();
@@ -137,10 +147,11 @@ app.get('/', (req, res) => {
 
 // Retrieve an anime information
 app.get('/a/:id', (req, res) => {
-    res.json({
-        media: 'anime',
-        id: req.query.id,
-        title: 'Soon...'
+    anime(parseInt(req.params.id))
+    .then(a => res.json(a))
+    .catch(err => {
+        res.status(404);
+        res.send(err.message)
     });
 });
 
