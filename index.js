@@ -6,25 +6,40 @@
  * License: The MIT License <https://github.com/mizopro/phnbot/blob/master/LICENSE>
  */
 
+
+/*
+ * Module dependencies
+ * @api private
+ */
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const request = require("request");
 const dotenv = require("dotenv");
 
-// Load environment variables and add them to `process.env`
+// Load environment variables
 dotenv.load();
 
 
 /**
  * @const {Express} app
  */
-const app = express().use(bodyParser.json());
+const app = express()
+
+        .use(bodyParser.json());
+
 
 /**
- * @const {String} PAGE_ACCESS_TOKEN
+ * @const {String} PAGE_ACCESS_TOKEN - Page's Unique Private Access Token
  */
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+
+
+/**
+ * @const {String} VERIFY_TOKEN - Webhook's Verify Token
+ */
+const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+
 
 /**
  * @const {Number} PORT
@@ -32,10 +47,17 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const PORT = process.env.PORT || 1337;
 
 
-// Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
+// Message Format
+const MSG_RE = /=\s*(.*?)/gi;
 
-// Creates the endpoint for our webhook
+
+// Serve public files
+app
+    .use(express.static(path.join(__dirname, 'public')));
+
+// --- WEBHOOK ---
+
+// POST :: Creates the endpoint for the webhook
 app.post('/webhook', (req, res) => {
 
     const body = req.body;
@@ -73,13 +95,9 @@ app.post('/webhook', (req, res) => {
 
 });
 
-// Adds support for GET requests to our webhook
-app.get('/webhook', (req, res) => {
 
-    /**
-     * @const {String} VERIFY_TOKEN
-     */
-    const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+// GET :: Adds support for GET requests to the webhook
+app.get('/webhook', (req, res) => {
 
     // Parse the query params
     let mode = req.query['hub.mode'];
@@ -106,15 +124,30 @@ app.get('/webhook', (req, res) => {
     }
 });
 
-// App optional index page
+
+// --- STATIC ---
+
+// App  index page
 app.get('/', (req, res) => {
     res.sendFile('index.html');
 });
 
-// Retrieve an anime information
-app.get('/anime', (req, res) => {
 
+// --- API ---
+
+// Retrieve an anime information
+app.get('/a/:id', (req, res) => {
+    res.json({
+        media: 'anime',
+        id: req.query.id,
+        title: 'Soon...'
+    });
 });
+
+app.get('/m/:id', (req, res) => {
+    res.json(null);
+});
+
 
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
